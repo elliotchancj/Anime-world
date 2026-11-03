@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="theme-color" content="#7bb8f0" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Ccircle cx=%228%22 cy=%228%22 r=%227%22 fill=%22%23E3002C%22/%3E%3C/svg%3E" />
+<meta name="mobile-web-app-capable" content="yes" />
+<link rel="manifest" href="./manifest.webmanifest" />
+<title>Nohara House 3D (fan project)</title>
+<style>
+  html,body{margin:0;height:100%;overflow:hidden;background:#9ad3f0;font-family:system-ui,-apple-system,"Hiragino Sans","Noto Sans CJK JP",sans-serif;touch-action:none;-webkit-user-select:none;user-select:none}
+  #app{position:fixed;inset:0}
+  canvas{display:block;width:100%;height:100%;outline:none}
+  .hud{position:fixed;z-index:5;display:flex;flex-wrap:wrap;gap:6px}
+  #top{top:calc(8px + env(safe-area-inset-top));right:calc(8px + env(safe-area-inset-right));justify-content:flex-end;max-width:70vw}
+  .btn{background:rgba(255,255,255,.88);border:2px solid #333;border-radius:10px;padding:6px 10px;font-size:13px;font-weight:700;color:#222;cursor:pointer;line-height:1}
+  .btn.on{background:#ffd84a}
+  .grp{display:flex;gap:4px;background:rgba(0,0,0,.18);padding:4px;border-radius:12px}
+  #label{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top));transform:translateX(-50%);background:#fff;border:3px solid #222;border-radius:14px;padding:8px 14px;font-weight:800;font-size:15px;display:none;z-index:6;max-width:80vw;text-align:center}
+  #label small{display:block;font-weight:500;font-size:12px;margin-top:3px;color:#444}
+  #help{position:fixed;left:calc(8px + env(safe-area-inset-left));top:calc(8px + env(safe-area-inset-top));background:rgba(255,255,255,.9);border:2px solid #333;border-radius:12px;padding:10px 12px;font-size:12px;line-height:1.5;z-index:5;max-width:300px}
+  #help b{font-size:13px}
+  #joy{position:fixed;left:calc(24px + env(safe-area-inset-left));bottom:calc(24px + env(safe-area-inset-bottom));width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,.25);border:3px solid rgba(0,0,0,.35);z-index:5;display:none;touch-action:none}
+  #knob{position:absolute;left:40px;top:40px;width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.85);border:3px solid #333}
+  #touchbtns{position:fixed;right:calc(18px + env(safe-area-inset-right));bottom:calc(24px + env(safe-area-inset-bottom));display:none;gap:10px;z-index:5;flex-direction:column;align-items:flex-end}
+  #touchbtns .btn{width:64px;height:64px;border-radius:50%;font-size:13px}
+  #rotate{position:fixed;inset:0;background:#7bb8f0;color:#222;display:none;z-index:20;align-items:center;justify-content:center;flex-direction:column;font-weight:800;font-size:20px;text-align:center;padding:20px}
+  #rotate .ph{width:70px;height:120px;border:6px solid #222;border-radius:14px;margin-bottom:18px;animation:rot 1.8s ease-in-out infinite}
+  @keyframes rot{0%,30%{transform:rotate(0)}60%,100%{transform:rotate(-90deg)}}
+  @media (orientation:portrait) and (pointer:coarse){#rotate.enabled{display:flex}}
+  #loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#9ad3f0;z-index:30;font-weight:800;font-size:22px}
+  #fps{position:fixed;left:8px;bottom:6px;font:11px monospace;color:#000;opacity:.6;z-index:5}
+  #disclaimer{position:fixed;right:8px;bottom:4px;font-size:10px;color:#222;opacity:.7;z-index:4;pointer-events:none}
+  @media (pointer:coarse){#help{display:none}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="loading">Loading Kasukabe…</div>
+<div id="label"></div>
+<div id="help"><b>Nohara House 3D</b><br>WASD / arrows: move · Shift: run · Space: jump<br>Drag: orbit · Wheel: zoom · Click object: inspect (Esc to exit)<br>B: butt dance · E: open/close door · H: hide help</div>
+<div class="hud" id="top"></div>
+<div id="joy"><div id="knob"></div></div>
+<div id="touchbtns"><button class="btn" id="tJump">Jump</button><button class="btn" id="tRun">Run</button><button class="btn" id="tDance">Dance</button></div>
+<div id="rotate" class="enabled"><div class="ph"></div>Rotate your phone to landscape</div>
+<div id="fps"></div>
+<div id="disclaimer">Unofficial non-commercial fan project · Crayon Shin-chan © Yoshito Usui / Futabasha / Shin-Ei / TV Asahi / ADK</div>
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>
